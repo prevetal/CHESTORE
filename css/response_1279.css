@@ -1,0 +1,423 @@
+@media print,
+(max-width: 1279px)
+{
+    /*-------------------
+        Global styles
+    -------------------*/
+    :root
+    {
+        --custom_scroll_width: 5px;
+        --custom_scroll_height: 5px;
+        --font_size_b: 17px;
+        --font_size: 15px;
+        --font_size_s: 13px;
+        --font_size_ss: 11px;
+        --font_size_title_b: 40px;
+        --block_head_offset: 48px;
+        --block_padding: 24px;
+        --outside_gap: 80px;
+        --outside_gap_s: 48px;
+        --inner_gap: 20px;
+        --inner_gap_m: 16px;
+        --inner_gap_s: 8px;
+        --button_size: 40px;
+    }
+
+
+
+    .content_flex .content
+    {
+        width: calc(100% - var(--sidebar_width) - var(--cont_padding));
+    }
+
+
+
+    /*--------------
+        Fancybox
+    --------------*/
+    .fancybox__content > .f-button.is-close-btn,
+    .is-compact .fancybox__content > .f-button.is-close-btn
+    {
+        top: 34px;
+    }
+
+
+
+    /*------------
+        Header
+    ------------*/
+    header .bottom
+    {
+        padding-block: var(--inner_gap);
+    }
+
+
+
+    header .logo
+    {
+        margin-top: -12px;
+    }
+
+
+    header .logo img
+    {
+        width: 245px;
+        height: 49px;
+    }
+
+
+
+    header .search
+    {
+        width: 180px;
+    }
+
+
+    header .search .submit_btn
+    {
+        right: 0;
+    }
+
+
+    header .search .submit_btn .icon
+    {
+        width: 20px;
+    }
+
+
+
+    header .btns .btn .icon
+    {
+        width: 20px;
+    }
+
+
+
+    /*------------------
+        Form elements
+    ------------------*/
+    .form
+    {
+        --form_textarea_height: 136px;
+    }
+
+
+
+    /*----------------
+        Typography
+    ----------------*/
+    .text_block ul li,
+    .text_block ol li
+    {
+        padding-left: 24px;
+    }
+
+
+    .text_block ul li:before
+    {
+        width: 6px;
+    }
+
+
+
+    /*-----------------
+        Main slider
+    -----------------*/
+    .main_slider .swiper-horizontal > .swiper-pagination-bullets,
+    .main_slider .swiper-pagination-bullets.swiper-pagination-horizontal,
+    .main_slider .swiper-pagination-custom,
+    .main_slider .swiper-pagination-fraction
+    {
+        bottom: 100px;
+        left: var(--cont_padding);
+
+        margin-left: 0;
+    }
+
+
+    .main_slider .cont
+    {
+        min-height: 440px;
+        padding-block: 100px;
+    }
+
+
+    .main_slider .image
+    {
+        right: 0;
+        left: auto;
+
+        width: 60%;
+        padding-block: var(--block_padding);
+        padding-inline: var(--cont_padding);
+    }
+
+
+
+    .main_slider .data
+    {
+        width: 40%;
+    }
+
+
+    .main_slider .link
+    {
+        margin-top: 0;
+    }
+
+
+
+    /*--------------
+        Catalog
+    --------------*/
+    .catalog .grid
+    {
+        height: 800px;
+
+        grid-template-columns: repeat(5, 1fr);
+    }
+
+
+
+    /*-------------
+        Reviews
+    -------------*/
+    .reviews .swiper-button-next,
+    .reviews .swiper-button-prev
+    {
+        display: none;
+    }
+
+
+    .reviews .swiper-slide
+    {
+        visibility: visible;
+
+        width: 300px;
+
+        pointer-events: auto;
+
+        opacity: 1;
+    }
+
+
+
+    /*-----------------
+        Shop rating
+    -----------------*/
+    .shop_rating .item
+    {
+        --shop_item_val_width: 100px;
+    }
+
+
+
+    /*--------------
+        Articles
+    --------------*/
+    .articles .article .info,
+    .articles .article:nth-child(2n) .info
+    {
+        padding-inline: var(--block_padding);
+    }
+
+
+
+    /*----------------
+        About info
+    ----------------*/
+    .about_info
+    {
+        --about_info_desc_width: 400px;
+    }
+
+
+    .about_info .swiper .thumb,
+    .about_info .swiper .thumb img
+    {
+        height: 240px;
+    }
+
+
+
+    /*----------------
+        Advantages
+    ----------------*/
+    .advantages .item .icon
+    {
+        width: 52px;
+    }
+
+
+    .advantages .item .icon img
+    {
+        width: 24px;
+    }
+
+
+
+    /*-------------
+        Banners
+    -------------*/
+    .banners
+    {
+        --banner_width: 400px;
+    }
+
+
+    .banners .banner
+    {
+        min-height: 332px;
+    }
+
+
+
+    /*-------------------
+        Contacts info
+    -------------------*/
+    .contacts_info .data
+    {
+        padding: var(--block_padding);
+    }
+
+
+    .contacts_info .callback_btn
+    {
+        width: 200px;
+    }
+
+
+
+    /*-----------------
+        Action form
+    -----------------*/
+    .action_form .data
+    {
+        padding-block: 40px;
+    }
+
+
+    .action_form .form
+    {
+        width: 400px;
+    }
+
+
+    .action_form .image
+    {
+        left: var(--cont_padding);
+
+        height: 540px;
+    }
+
+
+
+    /*---------------
+        Cart info
+    ---------------*/
+    .cart_info .product
+    {
+        gap: var(--block_padding);
+    }
+
+
+    .cart_info .product .name
+    {
+        width: calc(100% - 383px);
+    }
+
+
+
+    /*--------------
+        Products
+    --------------*/
+    .products .sort
+    {
+        margin-bottom: var(--cont_padding);
+    }
+
+
+    .products .swiper-button-next,
+    .products .swiper-button-prev
+    {
+        display: none;
+    }
+
+
+    .products .swiper-pagination
+    {
+        margin-top: var(--cont_padding);
+    }
+
+
+    .products .product .image
+    {
+        height: 220px;
+        padding: calc(var(--block_padding) / 2) var(--block_padding);
+    }
+
+
+    .products .product .buy_btn .icon
+    {
+        width: 20px;
+    }
+
+
+
+    /*------------------
+        Product info
+    ------------------*/
+    .product_info
+    {
+        --sidebar_width: 268px;
+    }
+
+
+    .product_info .content
+    {
+        width: calc(100% - var(--sidebar_width) - var(--cont_padding));
+    }
+
+
+
+    /*------------------------
+        Product advantages
+    ------------------------*/
+    .product_advantages .item
+    {
+        --icon_size: 40px;
+    }
+
+
+
+    /*------------
+        Footer
+    ------------*/
+    footer .logo
+    {
+        margin-top: -12px;
+    }
+
+
+
+    footer .contacts
+    {
+        margin-top: 32px;
+
+        gap: var(--inner_gap_m);
+    }
+
+
+
+    footer .links
+    {
+        padding-block: var(--cont_padding_half);
+    }
+
+
+
+    footer .privacy_policy_link
+    {
+        width: auto;
+    }
+}

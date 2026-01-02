@@ -1,0 +1,179 @@
+@media (max-width: 479px)
+{
+    /*-------------------
+        Global styles
+    -------------------*/
+    :root
+    {
+        --font_size_title_b: 28px;
+        --font_size_title: 24px;
+        --font_size_title_s: 20px;
+        --block_head_offset: 24px;
+    }
+
+
+
+    /*------------
+        Header
+    ------------*/
+    header .logo img
+    {
+        width: 199px;
+        height: 40px;
+    }
+
+
+
+    header .contacts
+    {
+        display: none;
+    }
+
+
+
+    /*------------------
+        Form elements
+    ------------------*/
+    .form .grid_row
+    {
+        --offset_v: var(--zero_px);
+        --count_per_line: 1;
+    }
+
+
+
+    /*----------------
+        Typography
+    ----------------*/
+    .text_block > img
+    {
+        min-height: 160px;
+    }
+
+
+
+    /*-----------------
+        Main slider
+    -----------------*/
+    .main_slider .image
+    {
+        width: 68%;
+        height: 60%;
+    }
+
+
+
+    /*--------------
+        Catalog
+    --------------*/
+    .catalog .grid
+    {
+        height: 1400px;
+
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+
+    .catalog .category.mob_offset
+    {
+        grid-row: auto;
+    }
+
+
+
+    /*----------------
+        About info
+    ----------------*/
+    .about_info .swiper .thumb,
+    .about_info .swiper .thumb img
+    {
+        height: 148px;
+    }
+
+
+
+    /*----------------
+        Advantages
+    ----------------*/
+    .advantages .grid_row
+    {
+        --count_per_line: 1;
+    }
+
+
+
+    /*-------------
+        Banners
+    -------------*/
+    .banners .banner
+    {
+        min-height: 240px;
+    }
+
+
+    .banners .banner .desc br
+    {
+        display: none;
+    }
+
+
+
+    /*-------------------
+        Contacts info
+    -------------------*/
+    .contacts_info .callback_btn
+    {
+        width: 100%;
+        margin-top: var(--inner_gap_m);
+    }
+
+
+    .contacts_info #map
+    {
+        height: 360px;
+    }
+
+
+
+    /*-----------------
+        Action form
+    -----------------*/
+    .action_form .data
+    {
+        padding-block: var(--block_padding) 280px;
+    }
+
+
+    .action_form .image
+    {
+        bottom: -48px;
+
+        height: 300px;
+    }
+
+
+
+    /*---------------
+        Cart info
+    ---------------*/
+    .cart_info .cart_total
+    {
+        flex-direction: column;
+    }
+
+
+
+    /*--------------
+        Products
+    --------------*/
+    .products .product
+    {
+        gap: var(--inner_gap_s);
+    }
+
+
+    .products .product .image
+    {
+        height: 150px;
+    }
+}

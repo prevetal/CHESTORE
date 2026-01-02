@@ -1,0 +1,518 @@
+@media print,
+(max-width: 1023px)
+{
+    /*--------------
+        BG block
+    --------------*/
+    :root
+    {
+        --sidebar_width: 100%;
+        --font_size_title_s: 22px;
+    }
+
+
+
+    .content_flex .content
+    {
+        width: 100%;
+    }
+
+
+
+    /*--------------
+        BG block
+    --------------*/
+    .bg_block .big_logo
+    {
+        transform: translate(-50%, 12%);
+    }
+
+
+
+    /*--------------
+        Fancybox
+    --------------*/
+    .fancybox__content > .f-button.is-close-btn,
+    .is-compact .fancybox__content > .f-button.is-close-btn
+    {
+        top: 32px;
+    }
+
+
+
+    /*------------
+        Header
+    ------------*/
+    header .data,
+    header .bottom
+    {
+        padding-block: var(--inner_gap);
+    }
+
+
+
+    header .links
+    {
+        gap: var(--inner_gap);
+    }
+
+
+
+    header .logo
+    {
+        margin-top: -10px;
+    }
+
+
+    header .logo img
+    {
+        width: 219px;
+        height: 44px;
+    }
+
+
+
+    header .socials
+    {
+        display: none;
+    }
+
+
+
+    header .search
+    {
+        order: 2;
+
+        width: 100%;
+        margin-top: var(--inner_gap_m);
+    }
+
+
+
+    /*-------------
+        Sidebar
+    -------------*/
+    aside
+    {
+        margin-bottom: var(--inner_gap);
+    }
+
+
+    .content + aside
+    {
+        margin-top: var(--outside_gap_s);
+        margin-bottom: 0;
+    }
+
+
+    .mob_filter_btn
+    {
+        display: block;
+    }
+
+
+
+    /*-----------------
+        Main slider
+    -----------------*/
+    .main_slider .cont
+    {
+        min-height: 400px;
+        padding-block: 80px;
+    }
+
+
+    .main_slider .swiper-horizontal > .swiper-pagination-bullets,
+    .main_slider .swiper-pagination-bullets.swiper-pagination-horizontal,
+    .main_slider .swiper-pagination-custom,
+    .main_slider .swiper-pagination-fraction
+    {
+        bottom: 80px;
+    }
+
+
+
+    /*--------------
+        Catalog
+    --------------*/
+    .catalog .grid
+    {
+        grid-template-columns: repeat(4, 1fr);
+    }
+
+
+
+    /*-----------------
+        Shop rating
+    -----------------*/
+    .shop_rating .grid_row
+    {
+        display: grid;
+        overflow: auto;
+
+        width: calc(100% + var(--cont_padding_double));
+        margin-block: 0;
+        margin-inline: calc(var(--cont_padding) * -1);
+        padding-inline: var(--cont_padding);
+
+        gap: var(--inner_gap);
+        grid-auto-flow: column;
+        grid-auto-columns: max-content;
+        scroll-padding: 0 var(--cont_padding);
+        scroll-snap-type: x mandatory;
+        scrollbar-color: transparent transparent !important;
+        scrollbar-width: thin !important;
+    }
+
+
+    .shop_rating .grid_row::-webkit-scrollbar
+    {
+        display: none !important;
+
+        width: 0 !important;
+        height: 0 !important;
+
+        background-color: transparent !important;
+    }
+
+
+    .shop_rating .grid_row::-webkit-scrollbar-thumb
+    {
+        background-color: transparent !important;
+    }
+
+
+    .shop_rating .grid_row > *
+    {
+        width: 300px;
+        margin-bottom: 0;
+        margin-left: 0;
+
+        scroll-snap-align: start;
+    }
+
+
+
+    /*--------------
+        Articles
+    --------------*/
+    .articles .grid_row.inline
+    {
+        display: grid;
+        overflow: auto;
+
+        width: calc(100% + var(--cont_padding_double));
+        margin-block: 0;
+        margin-inline: calc(var(--cont_padding) * -1);
+        padding-inline: var(--cont_padding);
+
+        gap: var(--inner_gap);
+        grid-auto-flow: column;
+        grid-auto-columns: max-content;
+        scroll-padding: 0 var(--cont_padding);
+        scroll-snap-type: x mandatory;
+        scrollbar-color: transparent transparent !important;
+        scrollbar-width: thin !important;
+    }
+
+
+    .articles .grid_row.inline::-webkit-scrollbar
+    {
+        display: none !important;
+
+        width: 0 !important;
+        height: 0 !important;
+
+        background-color: transparent !important;
+    }
+
+
+    .articles .grid_row.inline::-webkit-scrollbar-thumb
+    {
+        background-color: transparent !important;
+    }
+
+
+    .articles .grid_row.inline > *
+    {
+        width: 240px;
+        margin-bottom: 0;
+        margin-left: 0;
+
+        scroll-snap-align: start;
+    }
+
+
+
+    .articles .article .thumb,
+    .articles .article .info
+    {
+        width: 100%;
+    }
+
+
+    .articles .article:nth-child(2n) .thumb
+    {
+        order: 0;
+    }
+
+
+
+    /*----------------
+        About info
+    ----------------*/
+    .about_info
+    {
+        --about_info_desc_width: 100%;
+    }
+
+
+    .about_info .swiper
+    {
+        width: 100%;
+        margin-top: var(--outside_gap_s);
+    }
+
+
+    .about_info .swiper-slide
+    {
+        visibility: visible;
+
+        pointer-events: auto;
+
+        opacity: 1;
+    }
+
+
+    .about_info .swiper-horizontal > .swiper-pagination-bullets,
+    .about_info .swiper-pagination-bullets.swiper-pagination-horizontal,
+    .about_info .swiper-pagination-custom,
+    .about_info .swiper-pagination-fraction
+    {
+        position: relative;
+        left: 0;
+
+        margin-top: var(--cont_padding);
+    }
+
+
+    .about_info .swiper .thumb,
+    .about_info .swiper .thumb img
+    {
+        height: 220px;
+    }
+
+
+
+    /*----------------
+        Advantages
+    ----------------*/
+    .advantages .big_logo
+    {
+        transform: translate(-50%, -48%);
+    }
+
+
+
+    /*-------------
+        Banners
+    -------------*/
+    .banners
+    {
+        --banner_width: 100%;
+    }
+
+
+    .banners .grid_row
+    {
+        --offset_h: var(--zero_px);
+        --count_per_line: 1;
+    }
+
+
+    .banners .grid_row > *.big
+    {
+        width: 100%;
+    }
+
+
+    .banners .banner
+    {
+        min-height: 400px;
+    }
+
+
+
+    /*-------------------
+        Contacts info
+    -------------------*/
+    .contacts_info .grid_row
+    {
+        --count_per_line: 1;
+    }
+
+
+    .contacts_info #map
+    {
+        height: 480px;
+    }
+
+
+
+    /*-----------------
+        Action form
+    -----------------*/
+    .action_form .data
+    {
+        padding-block: var(--outside_gap_s) 480px;
+    }
+
+
+    .action_form .form
+    {
+        width: 100%;
+    }
+
+
+    .action_form .image
+    {
+        top: auto;
+        bottom: -100px;
+        left: 50%;
+
+        transform: translateX(-50%);
+    }
+
+
+    .action_form .big_logo
+    {
+        max-width: calc(100% + var(--cont_padding));
+    }
+
+
+
+    /*---------------
+        Cart info
+    ---------------*/
+    .cart_info .product
+    {
+        padding-inline: 0;
+    }
+
+
+    .cart_info .product .number
+    {
+        display: none;
+    }
+
+
+    .cart_info .product .name
+    {
+        width: calc(100% - 349px);
+    }
+
+
+
+    /*------------
+        Filter
+    ------------*/
+    .filter
+    {
+        display: none;
+    }
+
+
+
+    /*--------------
+        Products
+    --------------*/
+    .products .grid_row
+    {
+        --count_per_line: 3;
+    }
+
+
+
+    /*------------------
+        Product info
+    ------------------*/
+    .product_info
+    {
+        --sidebar_width: 100%;
+    }
+
+
+    .product_info .content
+    {
+        width: 100%;
+    }
+
+
+    .product_info .options,
+    .product_info .buy
+    {
+        display: none;
+    }
+
+
+
+    /*------------------------
+        Product advantages
+    ------------------------*/
+    .product_advantages
+    {
+        margin-top: 0;
+    }
+
+
+
+    /*------------
+        Footer
+    ------------*/
+    footer .logo
+    {
+        margin-top: -10px;
+    }
+
+
+    footer .logo img
+    {
+        width: 219px;
+        height: 44px;
+    }
+
+
+
+    footer .data .grid_row
+    {
+        justify-content: space-between;
+    }
+
+
+    footer .data .grid_row > *
+    {
+        width: auto;
+    }
+
+
+
+    footer .links
+    {
+        width: auto;
+        padding-block: 0;
+    }
+
+
+
+    footer .shops .grid_row
+    {
+        --count_per_line: 2;
+    }
+
+
+
+    footer .big_logo
+    {
+        transform: translate(-50%, 12%);
+    }
+}

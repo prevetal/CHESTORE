@@ -1,0 +1,147 @@
+.swiper-button-next,
+.swiper-button-prev
+{
+    top: 0;
+    bottom: 0;
+
+    display: flex;
+    align-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    justify-content: center;
+
+    width: var(--button_size);
+    height: var(--button_size);
+    margin-block: auto;
+
+    transition: color .2s linear;
+    transform: none;
+
+    color: var(--grey_color);
+    border: 1px solid;
+    border-radius: var(--border_radius_s);
+    background: none;
+}
+
+
+.swiper-button-prev
+{
+    left: 40px;
+}
+
+.swiper-button-next
+{
+    right: 40px;
+}
+
+
+.swiper-button-next:after,
+.swiper-button-prev:after
+{
+    display: none;
+}
+
+
+.swiper-button-next .icon,
+.swiper-button-prev .icon
+{
+    display: block;
+
+    width: 15px;
+
+    aspect-ratio: 1 / 1;
+}
+
+.swiper-button-next .icon
+{
+    transform: rotate(180deg);
+}
+
+
+.swiper-button-next:hover,
+.swiper-button-prev:hover
+{
+    color: var(--primary_color);
+}
+
+
+
+.swiper-horizontal > .swiper-pagination-bullets .swiper-pagination-bullet,
+.swiper-pagination-horizontal.swiper-pagination-bullets .swiper-pagination-bullet
+{
+    margin: 0;
+}
+
+
+
+.swiper-horizontal > .swiper-pagination-bullets,
+.swiper-pagination-bullets.swiper-pagination-horizontal,
+.swiper-pagination-custom,
+.swiper-pagination-fraction
+{
+    position: absolute;
+    bottom: 0;
+    left: 0;
+
+    display: flex;
+    align-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    justify-content: center;
+
+    width: 100%;
+    height: 8px;
+
+    pointer-events: none;
+
+    gap: 8px;
+}
+
+
+.swiper-pagination-bullet
+{
+    display: block;
+
+    width: 4px;
+    height: 4px;
+
+    transition: .2s linear;
+    pointer-events: auto;
+
+    opacity: .2;
+    border-radius: 50%;
+    background: var(--dark_color);
+}
+
+
+.swiper-pagination-bullet:hover,
+.swiper-pagination-bullet.active
+{
+    width: 8px;
+    height: 8px;
+
+    opacity: 1;
+}
+
+
+.swiper-container-horizontal > .swiper-pagination-bullets .swiper-pagination-bullet
+{
+    margin: 0;
+}
+
+
+.swiper-horizontal > .swiper-scrollbar,
+.swiper-scrollbar.swiper-scrollbar-horizontal
+{
+    position: relative;
+
+    margin-top: var(--inner_gap_m);
+
+    --swiper-scrollbar-sides-offset: 0;
+    --swiper-scrollbar-bottom: 0;
+    --swiper-scrollbar-top: 0;
+    --swiper-scrollbar-size: 4px;
+    --swiper-scrollbar-bg-color: var(--bg_grey);
+    --swiper-scrollbar-border-radius: 10px;
+    --swiper-scrollbar-drag-bg-color: rgba(17,17,17,.1);
+}
