@@ -911,20 +911,53 @@
 							<section class="content">
 								<section class="products">
 									<div class="sort">
-										<button class="btn price_btn">
-											<span>Цена</span>
-											<svg class="icon"><use xlink:href="images/sprite.svg#ic_sort_number"></use></svg>
-										</button>
+										<div class="price modal_cont">
+											<button class="btn up mini_modal_btn" data-modal-id="#price_sort_modal">
+												<span>Цена</span>
 
-										<button class="btn">
-											<span>Популярность</span>
-											<svg class="icon"><use xlink:href="images/sprite.svg#ic_sort"></use></svg>
-										</button>
+												<svg class="icon"><use xlink:href="images/sprite.svg#ic_sort_number_up"></use></svg>
 
-										<button class="btn">
-											<span>Название</span>
-											<svg class="icon"><use xlink:href="images/sprite.svg#ic_sort_alphabet"></use></svg>
-										</button>
+												<svg class="icon"><use xlink:href="images/sprite.svg#ic_sort_number_down"></use></svg>
+											</button>
+
+											<div class="mini_modal" id="price_sort_modal">
+												<button class="btn active" data-value="up">По возрастанию</button>
+
+												<button class="btn" data-value="down">По убыванию</button>
+											</div>
+										</div>
+
+										<div class="modal_cont">
+											<button class="btn up mini_modal_btn" data-modal-id="#popular_sort_modal">
+												<span>Популярность</span>
+
+												<svg class="icon"><use xlink:href="images/sprite.svg#ic_sort_up"></use></svg>
+
+												<svg class="icon"><use xlink:href="images/sprite.svg#ic_sort_down"></use></svg>
+											</button>
+
+											<div class="mini_modal" id="popular_sort_modal">
+												<button class="btn active" data-value="up">По возрастанию</button>
+
+												<button class="btn" data-value="down">По убыванию</button>
+											</div>
+										</div>
+
+										<div class="modal_cont">
+											<button class="btn up mini_modal_btn" data-modal-id="#name_sort_modal">
+												<span>Название</span>
+
+												<svg class="icon"><use xlink:href="images/sprite.svg#ic_sort_alphabet_up"></use></svg>
+
+												<svg class="icon"><use xlink:href="images/sprite.svg#ic_sort_alphabet_down"></use></svg>
+											</button>
+
+											<div class="mini_modal" id="name_sort_modal">
+												<button class="btn active" data-value="up">По возрастанию</button>
+
+												<button class="btn" data-value="down">По убыванию</button>
+											</div>
+										</div>
 									</div>
 
 									<div class="grid_row">

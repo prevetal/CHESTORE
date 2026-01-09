@@ -552,7 +552,12 @@ img.cover
 }
 
 
-.pagination a:hover,
+.pagination a:hover
+{
+    border-color: var(--primary_color);
+}
+
+
 .pagination a.active
 {
     color: var(--light_color);
@@ -670,6 +675,42 @@ img.cover
     height: auto;
 
     transition: opacity .5s linear;
+    pointer-events: auto;
+
+    opacity: 1;
+}
+
+
+
+/*----------------
+    Mini modal
+----------------*/
+.modal_cont
+{
+    position: relative;
+}
+
+
+.mini_modal
+{
+    position: absolute;
+    top: 100%;
+    left: 0;
+
+    visibility: hidden;
+
+    z-index: 9;
+    transition: .2s linear;
+    pointer-events: none;
+
+    opacity: 0;
+}
+
+
+.mini_modal.active
+{
+    visibility: visible;
+
     pointer-events: auto;
 
     opacity: 1;
@@ -1839,7 +1880,7 @@ aside
 
     line-height: 150%;
 
-    transition: .2s linear;
+    transition: border-color .2s linear;
     text-align: center;
     text-decoration: none;
 
@@ -1851,9 +1892,7 @@ aside
 
 .block_head .all_link a:hover
 {
-    color: var(--light_color);
-    border-color: var(--secondary_color);
-    background: var(--secondary_color);
+    border-color: var(--primary_color);
 }
 
 
@@ -2400,12 +2439,19 @@ aside
 
     line-height: 150%;
 
+    transition: background .2s linear;
     text-align: center;
     text-decoration: none;
 
     color: var(--light_color);
     border-radius: var(--border_radius_s);
     background: var(--secondary_color);
+}
+
+
+.main_slider .link:hover
+{
+    background: var(--primary_color);
 }
 
 
@@ -2439,6 +2485,44 @@ aside
     max-width: 100%;
     max-height: 100%;
     margin: auto;
+}
+
+
+
+.main_slider .video
+{
+    position: absolute;
+    top: 0;
+    left: 0;
+
+    width: 100%;
+    height: 100%;
+}
+
+
+.main_slider .video:before
+{
+    position: absolute;
+    inset: 0;
+
+    display: block;
+
+    content: '';
+    z-index: 2;
+
+    opacity: .25;
+    background: var(--dark_color);
+}
+
+
+.main_slider .video video
+{
+    display: block;
+
+    width: 100%;
+    height: 100%;
+
+    object-fit: cover;
 }
 
 
@@ -3020,7 +3104,7 @@ aside
 
     line-height: 150%;
 
-    transition: .2s linear;
+    transition: border-color .2s linear;
     text-align: center;
     text-decoration: none;
 
@@ -3032,9 +3116,7 @@ aside
 
 .articles .article .link a:hover
 {
-    color: var(--light_color);
-    border-color: var(--secondary_color);
-    background: var(--secondary_color);
+    border-color: var(--primary_color);
 }
 
 
@@ -3232,6 +3314,7 @@ aside
 
     line-height: 150%;
 
+    transition: .2s linear;
     text-align: center;
 
     border-radius: var(--border_radius);
@@ -3273,6 +3356,13 @@ aside
 .advantages .item .name
 {
     font-weight: 600;
+}
+
+
+.advantages .item:hover
+{
+    background: none;
+    box-shadow: inset 0 0 0 1px var(--primary_color);
 }
 
 
@@ -3373,9 +3463,17 @@ aside
 
     line-height: 150%;
 
+    transition: background .2s linear;
+
     color: var(--light_color);
     border-radius: var(--border_radius_s);
     background: var(--secondary_color);
+}
+
+
+.banners .banner .btn:hover
+{
+    background: var(--primary_color);
 }
 
 
@@ -3473,9 +3571,17 @@ aside
 
     line-height: 150%;
 
+    transition: background .2s linear;
+
     color: var(--light_color);
     border-radius: var(--border_radius_s);
     background: var(--secondary_color);
+}
+
+
+.contacts_info .callback_btn:hover
+{
+    background: var(--primary_color);
 }
 
 
@@ -4288,8 +4394,16 @@ aside
 }
 
 
+.products .sort .price
+{
+    margin-right: auto;
+}
+
+
 .products .sort .btn
 {
+    position: relative;
+
     display: flex;
     align-content: center;
     align-items: center;
@@ -4298,17 +4412,14 @@ aside
 
     line-height: 150%;
 
+    z-index: 10;
     transition: color .2s linear;
+    text-align: left;
+    white-space: nowrap;
 
     color: var(--grey_color);
 
     gap: var(--inner_gap_s);
-}
-
-
-.products .sort .price_btn
-{
-    margin-right: auto;
 }
 
 
@@ -4322,9 +4433,54 @@ aside
 }
 
 
-.products .sort .btn:hover
+.products .sort .btn .icon + .icon
+{
+    display: none;
+}
+
+
+.products .sort .btn.down .icon
+{
+    display: none;
+}
+
+.products .sort .btn.down .icon + .icon
+{
+    display: block;
+}
+
+
+.products .sort .btn:hover,
+.products .sort .btn.active
 {
     color: var(--primary_color);
+}
+
+
+.products .sort .mini_modal
+{
+    position: absolute;
+    top: calc(var(--inner_gap_s) * -1);
+    left: calc(var(--inner_gap) * -1);
+
+    display: flex;
+    flex-direction: column;
+
+    min-width: calc(100% + var(--inner_gap) * 2);
+    padding-block: 44px var(--inner_gap_s);
+    padding-inline: var(--inner_gap);
+
+    border-radius: var(--border_radius);
+    background: var(--bg);
+
+    gap: var(--inner_gap_s);
+}
+
+
+.products .sort > *:last-child .mini_modal
+{
+    right: calc(var(--inner_gap) * -1);
+    left: auto;
 }
 
 
@@ -5007,8 +5163,17 @@ aside
 
     line-height: 150%;
 
+    transition: .2s linear;
+
     border-radius: var(--border_radius_s);
     background: var(--secondary_color);
+}
+
+
+.product_info .buy_btn:hover
+{
+    color: var(--dark_color);
+    background: var(--light_color);
 }
 
 

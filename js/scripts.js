@@ -26,6 +26,16 @@ document.addEventListener('DOMContentLoaded', function() {
 				clickable: true,
 				bulletActiveClass: 'active'
 			},
+			on: {
+				init: swiper => setHeight(swiper.el.querySelectorAll('.swiper-slide')),
+				resize: swiper => {
+					let slides = swiper.el.querySelectorAll('.swiper-slide')
+
+					slides.forEach(el => el.style.height = 'auto')
+
+					setHeight(slides)
+				}
+			}
 		})
 	}
 
@@ -511,6 +521,62 @@ document.addEventListener('DOMContentLoaded', function() {
 			}
 		})
 	}
+
+
+	// Mini pop-up windows
+	$('.mini_modal_btn').click(function(e) {
+		e.preventDefault()
+
+		const modalId = $(this).data('modal-id')
+
+		if ($(this).hasClass('active')) {
+			$(this).removeClass('active')
+			$('.mini_modal').removeClass('active')
+
+			if (is_touch_device()) $('body').css('cursor', 'default')
+		} else {
+			$('.mini_modal_btn').removeClass('active')
+			$(this).addClass('active')
+
+			$('.mini_modal').removeClass('active')
+			$(modalId).addClass('active')
+
+			if (is_touch_device()) $('body').css('cursor', 'pointer')
+		}
+	})
+
+	// Close the popup when you click outside of it
+	$(document).click(e => {
+		if ($(e.target).closest('.modal_cont').length === 0) {
+			$('.mini_modal, .mini_modal_btn').removeClass('active')
+
+			if (is_touch_device()) $('body').css('cursor', 'default')
+		}
+	})
+
+
+	// Sort
+	$('.sort .mini_modal .btn').click(function(e) {
+		e.preventDefault()
+
+		const value = $(this).data('value'),
+			parent = $(this).closest('.modal_cont')
+
+		parent.find('.mini_modal_btn').removeClass('up down').addClass(value)
+
+		parent.find('.mini_modal .btn').removeClass('active')
+		$(this).addClass('active')
+
+		$('.mini_modal, .mini_modal_btn').removeClass('active')
+
+		if (is_touch_device()) $('body').css('cursor', 'default')
+
+		// if (value === 'up') {
+		// 	// sort up
+		// } else {
+		// 	// sort down
+		// }
+	})
 })
 
 
@@ -543,3 +609,41 @@ window.addEventListener('resize', function () {
 		}
 	}
 })
+
+
+
+// Map
+const initMap = () => {
+	ymaps.ready(() => {
+		let myMap = new ymaps.Map('map', {
+			center: [55.755864, 37.617698],
+			zoom: 16,
+			controls: []
+		})
+
+
+		// Placemark
+		let myPlacemark = new ymaps.Placemark([55.755864, 37.617698], {}, {
+			iconLayout : 'default#image',
+			iconImageHref : 'images/map_marker.svg',
+			iconImageSize : [50, 61],
+			iconImageOffset : [-25, -61],
+		})
+
+		myMap.geoObjects.add(myPlacemark)
+
+
+		// Placemark 2
+		let myPlacemark2 = new ymaps.Placemark([55.757766, 37.614864], {}, {
+			iconLayout : 'default#image',
+			iconImageHref : 'images/map_marker.svg',
+			iconImageSize : [50, 61],
+			iconImageOffset : [-25, -61],
+		})
+
+		myMap.geoObjects.add(myPlacemark2)
+
+
+		myMap.behaviors.disable('scrollZoom')
+	})
+}
