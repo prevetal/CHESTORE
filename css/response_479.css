@@ -176,4 +176,20 @@
     {
         height: 150px;
     }
+
+
+
+    /*------------------
+        Product info
+    ------------------*/
+    .product_info .mob_data .option .grid_row
+    {
+        --count_per_line: 4;
+    }
+
+
+    .product_info .mob_data .option .grid_row.vals
+    {
+        --count_per_line: 2;
+    }
 }

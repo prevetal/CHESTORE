@@ -149,6 +149,12 @@
     /*----------------
         Block head
     ----------------*/
+    .block_head
+    {
+        justify-content: center;
+    }
+
+
     .block_head .all_link
     {
         display: none;
@@ -526,25 +532,48 @@
 
 
 
+    .product_info .mob_data .option .grid_row
+    {
+        --count_per_line: 5;
+    }
+
+
+
     /*------------
         Footer
     ------------*/
+    footer .data .grid_row,
+    footer .shops .grid_row
+    {
+        --count_per_line: 1;
+        --offset_h: var(--zero_px);
+    }
+
+
+    footer .shops .grid_row
+    {
+        width: 245px;
+        max-width: 100%;
+        margin-inline: auto;
+    }
+
+
+    footer .data .grid_row > *
+    {
+        width: 100%;
+    }
+
+
     footer .data .grid_row > *.links
     {
         display: none;
     }
 
 
-    footer .data .grid_row,
-    footer .shops .grid_row
-    {
-        --count_per_line: 1;
-    }
-
-
 
     footer .logo
     {
+        margin-inline: auto;
         margin-top: -8px;
     }
 
@@ -561,6 +590,15 @@
         margin-top: 24px;
         margin-bottom: var(--inner_gap_s);
 
+        text-align: center;
+
         gap: var(--inner_gap_s);
+    }
+
+
+    footer .ya_rating,
+    footer .socials
+    {
+        margin-inline: auto;
     }
 }

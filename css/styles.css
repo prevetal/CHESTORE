@@ -647,9 +647,7 @@ img.cover
 
 .tabs .btn.active
 {
-    font-size: var(--font_size_title_s);
     font-weight: 700;
-    line-height: 150%;
 }
 
 
@@ -825,6 +823,13 @@ header .links a:hover,
 header .links a.active
 {
     color: var(--primary_color);
+}
+
+
+header .links a.primary:hover,
+header .links a.primary.active
+{
+    color: var(--light_color);
 }
 
 
@@ -1034,10 +1039,18 @@ header .contacts .email
 header .contacts .phone a,
 header .contacts .email a
 {
+    transition: color .2s linear;
     white-space: nowrap;
     text-decoration: none;
 
     color: currentColor;
+}
+
+
+header .contacts .phone a:hover,
+header .contacts .email a:hover
+{
+    color: var(--primary_color);
 }
 
 
@@ -1328,7 +1341,7 @@ header .sub_menu a
 {
     display: block;
 
-    font-size: var(--font_size_ss);
+    font-size: var(--font_size_s);
     line-height: 150%;
 
     transition: color .2s linear;
@@ -1414,6 +1427,7 @@ header .sub_menu a.active
     flex-wrap: wrap;
     justify-content: flex-start;
 
+    font-size: var(--font_size_b);
     line-height: 150%;
 
     transition: color .2s linear;
@@ -1477,7 +1491,7 @@ header .sub_menu a.active
 {
     display: block;
 
-    font-size: var(--font_size_s);
+    font-size: var(--font_size);
     line-height: 150%;
 
     transition: color .2s linear;
@@ -1643,7 +1657,7 @@ header .sub_menu a.active
 
 .mob_menu .contacts .email
 {
-    font-size: var(--font_size_ss);
+    font-size: var(--font_size_s);
     line-height: 150%;
 }
 
@@ -2594,6 +2608,7 @@ aside
     padding-block: var(--block_padding);
     padding-inline: var(--inner_gap_m);
 
+    transition: .2s linear;
     text-align: center;
     text-decoration: none;
 
@@ -2612,13 +2627,6 @@ aside
 .catalog .category.double_w
 {
     grid-column: span 2;
-}
-
-
-.catalog .category.dark
-{
-    color: var(--primary_color);
-    background: var(--dark_color);
 }
 
 
@@ -2657,6 +2665,13 @@ aside
 
     max-width: 100%;
     margin-inline: auto;
+}
+
+
+.catalog .category:hover
+{
+    color: var(--primary_color);
+    background: var(--dark_color);
 }
 
 
@@ -2829,6 +2844,10 @@ aside
     align-items: flex-start;
     flex-wrap: wrap;
     justify-content: space-between;
+
+    text-decoration: none;
+
+    color: currentColor;
 
     --shop_item_val_width: 108px;
 }
@@ -3411,19 +3430,15 @@ aside
     min-height: 400px;
     padding: var(--outside_gap_s);
 
+    transition: .2s linear;
     text-align: center;
     text-decoration: none;
 
     color: currentColor;
     border-radius: var(--border_radius);
+    background: var(--bg_grey);
 
     gap: var(--inner_gap_m);
-}
-
-
-.banners .banner.light
-{
-    color: var(--light_color);
 }
 
 
@@ -3471,18 +3486,6 @@ aside
 }
 
 
-.banners .banner .btn:hover
-{
-    background: var(--primary_color);
-}
-
-
-.banners .banner .btn.primary
-{
-    background: var(--primary_color);
-}
-
-
 .banners .banner .thumb
 {
     position: absolute;
@@ -3493,6 +3496,19 @@ aside
     z-index: 1;
 
     border-radius: var(--border_radius);
+}
+
+
+.banners .banner:hover
+{
+    color: var(--light_color);
+    background: var(--dark_color);
+}
+
+
+.banners .banner:hover .btn
+{
+    background: var(--primary_color);
 }
 
 
@@ -3907,10 +3923,17 @@ aside
 {
     display: inline-block;
 
+    transition: color .2s linear;
     vertical-align: top;
     text-decoration: none;
 
     color: currentColor;
+}
+
+
+.cart_info .product .name a:hover
+{
+    color: var(--primary_color);
 }
 
 
@@ -4195,7 +4218,6 @@ aside
     flex-wrap: wrap;
     justify-content: space-between;
 
-    font-size: var(--font_size_s);
     font-weight: 600;
     line-height: 150%;
 
@@ -4289,9 +4311,15 @@ aside
 
 .filter .range .input
 {
-    font-size: var(--font_size_ss);
+    font-size: var(--font_size_s);
 
     color: var(--dark_color);
+}
+
+
+.filter .checkbox
+{
+    font-size: var(--font_size_s);
 }
 
 
@@ -4309,7 +4337,7 @@ aside
 
 .filter .spoler_btn
 {
-    font-size: var(--font_size_ss);
+    font-size: var(--font_size_s);
     line-height: 150%;
 
     transition: color .2s linear;
@@ -4348,7 +4376,7 @@ aside
     width: 100%;
     margin-top: calc(var(--block_padding) / 2);
 
-    font-size: var(--font_size_ss);
+    font-size: var(--font_size_s);
     line-height: 150%;
 
     transition: color .2s linear;
@@ -4690,7 +4718,7 @@ aside
 
     line-height: 150%;
 
-    transition: border-color .2s linear;
+    transition: .2s linear;
     text-align: center;
     text-decoration: none;
 
@@ -4702,7 +4730,9 @@ aside
 
 .products .product .link:hover
 {
-    border-color: var(--primary_color);
+    color: var(--light_color);
+    border-color: var(--dark_color);
+    background: var(--dark_color);
 }
 
 
@@ -5178,6 +5208,28 @@ aside
 
 
 
+.product_info .mob_data
+{
+    display: none;
+    flex-direction: column;
+
+    margin-bottom: var(--cont_padding_double);
+}
+
+
+.product_info .mob_data .option .grid_row
+{
+    --count_per_line: 8;
+}
+
+
+.product_info .mob_data .option .grid_row.vals
+{
+    --count_per_line: 4;
+}
+
+
+
 .product_info .text_block * + h2,
 .product_info .text_block * + h3
 {
@@ -5266,6 +5318,10 @@ aside
 
     line-height: 150%;
 
+    transition: color .2s linear;
+    text-decoration: none;
+
+    color: currentColor;
     border-radius: var(--border_radius);
     background: var(--bg_grey);
 
@@ -5307,6 +5363,12 @@ aside
     align-self: center;
 
     width: calc(100% - var(--icon_size) - var(--inner_gap_m));
+}
+
+
+.product_advantages .item:hover
+{
+    color: var(--primary_color);
 }
 
 

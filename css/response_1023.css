@@ -88,6 +88,12 @@
     }
 
 
+    header .search .input
+    {
+        font-size: var(--font_size);
+    }
+
+
 
     /*-------------
         Sidebar
@@ -422,6 +428,50 @@
     }
 
 
+    .filter .item
+    {
+        padding-bottom: var(--inner_gap_m);
+    }
+
+
+    .filter .item + .item
+    {
+        margin-top: var(--inner_gap_m);
+    }
+
+
+    .filter .name
+    {
+        font-size: var(--font_size_b);
+    }
+
+
+    .filter .range .input
+    {
+        font-size: var(--font_size);
+    }
+
+
+    .filter .checkbox
+    {
+        font-size: var(--font_size);
+    }
+
+
+    .filter .spoler_btn
+    {
+        font-size: var(--font_size);
+    }
+
+
+    .filter .reset_btn
+    {
+        margin-top: var(--inner_gap_m);
+
+        font-size: var(--font_size);
+    }
+
+
 
     /*--------------
         Products
@@ -448,8 +498,14 @@
     }
 
 
-    .product_info .options,
-    .product_info .buy
+    .product_info .mob_data
+    {
+        display: flex;
+    }
+
+
+    .product_info aside .options,
+    .product_info aside .buy
     {
         display: none;
     }
