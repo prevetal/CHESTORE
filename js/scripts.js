@@ -2,6 +2,33 @@ WW = window.innerWidth || document.clientWidth || document.getElementsByTagName(
 WH = window.innerHeight || document.clientHeight || document.getElementsByTagName('body')[0].clientHeight
 
 
+// В самом начале вашего JS файла, перед DOMContentLoaded
+// Функция для работы с куки
+function setCookie(name, value, days) {
+    let expires = "";
+    if (days) {
+        let date = new Date();
+        date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
+        expires = "; expires=" + date.toUTCString();
+    }
+    document.cookie = name + "=" + (value || "") + expires + "; path=/";
+}
+
+function getCookie(name) {
+    let nameEQ = name + "=";
+    let ca = document.cookie.split(';');
+    for (let i = 0; i < ca.length; i++) {
+        let c = ca[i];
+        while (c.charAt(0) === ' ') c = c.substring(1, c.length);
+        if (c.indexOf(nameEQ) === 0) return c.substring(nameEQ.length, c.length);
+    }
+    return null;
+}
+
+function eraseCookie(name) {
+    document.cookie = name + '=; Max-Age=-99999999; path=/';
+}
+
 document.addEventListener('DOMContentLoaded', function() {
 	// Main slider
 	let mainSlider = document.querySelector('.main_slider .swiper')
@@ -283,7 +310,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
 
 	// Changing the quantity of goods
-	$('body').on('click', '.amount .minus', function (e) {
+	/*$('body').on('click', '.amount .minus', function (e) {
 		e.preventDefault()
 
 		const $parent = $(this).closest('.amount'),
@@ -317,7 +344,7 @@ document.addEventListener('DOMContentLoaded', function() {
 			if (_self.val() == '' || _self.val() == 0) _self.val(parseInt(_self.data('minimum')))
 			if (_self.val() > maximum) _self.val(maximum)
 		})
-	})
+	})*/
 
 
 	// Tabs
@@ -464,33 +491,88 @@ document.addEventListener('DOMContentLoaded', function() {
 		data.find('.field').toggleClass('show')
 	})
 
+     if($('.price_range').length) {
+        // Удаляем priceRangePostfix, так как он не будет использоваться ни для отображения, ни для URL
+        // const priceRangePostfix = 'р.'; // Эту строку удаляем или комментируем
 
-	const priceRangePostfix = 'р.'
+        // Получаем текущие значения min и max из полей ввода
+        // Нам нужно очистить значения от любых нечисловых символов, чтобы получить чистое число
+        let initialMinPrice = parseInt($('.price_range input.from').val().replace(/[^\d]/g, ""), 10);
+        let initialMaxPrice = parseInt($('.price_range input.to').val().replace(/[^\d]/g, ""), 10);
 
-	const priceRange = $('#price_range').ionRangeSlider({
-		type: 'double',
-		min: 0,
-		max: 1000000,
-		from: 5000,
-		to: 250000,
-		step: 100,
-		postfix: priceRangePostfix,
-		onChange: data => {
-			$('.price_range input.from').val(data.from + priceRangePostfix)
-			$('.price_range input.to').val(data.to + priceRangePostfix)
-		},
-		onUpdate: data => {
-			$('.price_range input.from').val(data.from + priceRangePostfix)
-			$('.price_range input.to').val(data.to + priceRangePostfix)
-		}
-	}).data('ionRangeSlider')
+        // Убедимся, что значения корректны, если нет, используем значения по умолчанию
+        if (isNaN(initialMinPrice)) {
+            initialMinPrice = 0; // Значение по умолчанию, если ничего не задано или ошибка
+        }
+        if (isNaN(initialMaxPrice)) {
+            initialMaxPrice = 1000000; // Значение по умолчанию
+        }
 
-	$('.price_range .input').keyup(function () {
-		priceRange.update({
-			from: parseInt($('.price_range input.from').val().replace(/[^\d]/g, ""), 10),
-			to: parseInt($('.price_range input.to').val().replace(/[^\d]/g, ""), 10)
-		})
-	})
+        const priceRange = $('#price_range').ionRangeSlider({
+            type: 'double',
+            min: 0,
+            max: 1000000, // Можно сделать это динамическим или достаточно большим
+            from: initialMinPrice, // Используем полученное значение min
+            to: initialMaxPrice,   // Используем полученное значение max
+            step: 100,
+            // postfix: priceRangePostfix, // УДАЛИТЬ эту строку, чтобы не добавлять 'р.'
+            // decorate_both: false, // Эту строку можно удалить, так как нет постфикса
+            onStart: function (data) {
+                // Отображаем только числа, форматируя их для читаемости (например, с пробелами-разделителями)
+                $('.price_range input.from').val(data.from.toLocaleString('ru-RU'));
+                $('.price_range input.to').val(data.to.toLocaleString('ru-RU'));
+            },
+            onChange: data => {
+                // При изменении слайдера, обновляем поля ввода только числами
+                $('.price_range input.from').val(data.from.toLocaleString('ru-RU'));
+                $('.price_range input.to').val(data.to.toLocaleString('ru-RU'));
+            },
+            onUpdate: data => {
+                // Также обновляем поля ввода при программном обновлении слайдера только числами
+                $('.price_range input.from').val(data.from.toLocaleString('ru-RU'));
+                $('.price_range input.to').val(data.to.toLocaleString('ru-RU'));
+            },
+            onFinish: function (data) {
+                // ionRangeSlider сам обновит свои внутренние значения `from` и `to`
+                // которые используются для формирования скрытого input.
+                // При клике на "Применить фильтры" форма отправится, и в URL будут чистые числа.
+
+                // Здесь может быть вызов отправки формы, если хотите автоматическую отправку
+                // $('.form_filter').submit();
+            }
+        }).data('ionRangeSlider');
+
+        // Обработчик для ручного ввода в поля
+        $('.price_range .input').on('change', function () {
+            // Очищаем значение от любых нечисловых символов перед передачей в update
+            const newMin = parseInt($('.price_range input.from').val().replace(/[^\d]/g, ""), 10);
+            const newMax = parseInt($('.price_range input.to').val().replace(/[^\d]/g, ""), 10);
+
+            priceRange.update({
+                from: isNaN(newMin) ? priceRange.result.min : newMin, // Если не число, берем минимум слайдера
+                to: isNaN(newMax) ? priceRange.result.max : newMax // Если не число, берем максимум слайдера
+            });
+            // НЕ отправляйте форму здесь автоматически
+        });
+
+        // Добавим форматирование для полей ввода при потере фокуса,
+        // чтобы пользователь видел числа с разделителями тысяч
+        $('.price_range .input').on('blur', function() {
+            let val = $(this).val();
+            // Очищаем от нечисловых символов перед форматированием
+            val = parseInt(val.replace(/[^\d]/g, ""), 10);
+            if (!isNaN(val)) {
+                $(this).val(val.toLocaleString('ru-RU'));
+            } else {
+                // Если пользователь ввел что-то некорректное, возвращаем последнее валидное значение слайдера
+                if ($(this).hasClass('from')) {
+                    $(this).val(priceRange.result.from.toLocaleString('ru-RU'));
+                } else {
+                    $(this).val(priceRange.result.to.toLocaleString('ru-RU'));
+                }
+            }
+        });
+    }
 
 
 	if (is_touch_device()) {
@@ -546,17 +628,17 @@ document.addEventListener('DOMContentLoaded', function() {
 	})
 
 	// Close the popup when you click outside of it
-	$(document).click(e => {
+	/*$(document).click(e => {
 		if ($(e.target).closest('.modal_cont').length === 0) {
 			$('.mini_modal, .mini_modal_btn').removeClass('active')
 
 			if (is_touch_device()) $('body').css('cursor', 'default')
 		}
-	})
+	})*/ 
 
 
 	// Sort
-	$('.sort .mini_modal .btn').click(function(e) {
+   /* $('.sort .mini_modal .btn').click(function(e) {
 		e.preventDefault()
 
 		const value = $(this).data('value'),
@@ -576,7 +658,111 @@ document.addEventListener('DOMContentLoaded', function() {
 		// } else {
 		// 	// sort down
 		// }
-	})
+	})*/
+
+    const sortCookieName = 'product_sort'; // Имя куки для сортировки
+
+    // Инициализация сортировки при загрузке страницы
+    function initSort() {
+        let currentSortBy = new URL(window.location.href).searchParams.get('sort_by');
+        let currentSortOrder = new URL(window.location.href).searchParams.get('sort_order');
+
+        let savedSort = getCookie(sortCookieName);
+
+        // Если в URL нет параметров, но они есть в куках, используем куки для ВИЗУАЛА
+        // Логику применения сортировки на сервере обрабатывает PHP
+        if (!currentSortBy && savedSort) {
+            const [cookieSortBy, cookieSortOrder] = savedSort.split(':');
+            currentSortBy = cookieSortBy;
+            currentSortOrder = cookieSortOrder;
+        } else if (currentSortBy && !savedSort) {
+            // Если параметры в URL есть, а в куках нет, сохраняем в куки
+            // это нужно при первом посещении по прямой ссылке с параметрами
+            setCookie(sortCookieName, `${currentSortBy}:${currentSortOrder}`, 7);
+        } else if (!currentSortBy && !savedSort) {
+            // Если нигде нет, устанавливаем дефолтное значение для визуала (или из вашего PHP)
+            currentSortBy = 'date';
+            currentSortOrder = 'desc';
+        }
+
+
+        // Применяем визуальное состояние кнопок
+        if (currentSortBy && currentSortOrder) {
+            $('.sort .modal_cont').each(function() {
+                const modalId = $(this).find('.mini_modal_btn').data('modal-id');
+                const sortType = modalId.replace('#', '').replace('_sort_modal', ''); // price, popularity, name
+
+                if (sortType === currentSortBy) {
+                    const btn = $(this).find('.mini_modal_btn');
+                    //btn.removeClass('up down').addClass(currentSortOrder).addClass('active');
+                    $(this).find(`.mini_modal .btn[data-value="${currentSortOrder}"]`).addClass('active');
+                } else {
+                    // Убираем активное состояние с других кнопок-родителей и их модалок
+                    $(this).find('.mini_modal_btn').removeClass('active up down');
+                    $(this).find('.mini_modal .btn').removeClass('active');
+                }
+            });
+        }
+    }
+
+    // Обработчик сохранения и применения сортировки
+    $('.sort .mini_modal .btn').click(function(e) {
+        e.preventDefault();
+
+        const sortOrder = $(this).data('value'); // 'up' или 'down'
+        const parentModalCont = $(this).closest('.modal_cont');
+        const modalId = parentModalCont.find('.mini_modal_btn').data('modal-id');
+        const sortBy = modalId.replace('#', '').replace('_sort_modal', ''); // Извлекаем 'price', 'popularity', 'name'
+
+        // Сохраняем сортировку в куки
+        setCookie(sortCookieName, `${sortBy}:${sortOrder}`, 7); // Хранить 7 дней
+
+        // Формируем новый URL с учетом сортировки и перезагружаем страницу
+        let newUrl = new URL(window.location.href);
+        newUrl.searchParams.set('sort_by', sortBy);
+        newUrl.searchParams.set('sort_order', sortOrder);
+        newUrl.searchParams.delete('paged'); // Сбрасываем пагинацию на 1 при новой сортировке
+
+        window.location.href = newUrl.toString(); // Перезагружаем страницу
+    });
+
+    // Обработчик для пагинации (стандартный, просто обновляем куки, если на странице не было sort_by)
+    $(document).on('click', '.wp-pagenavi a, .pagination a', function(e) {
+        // Если в URL УЖЕ есть параметры sort_by и sort_order, то ничего дополнительно сохранять не нужно
+        // PHP автоматически применит сортировку из URL к новой странице пагинации
+        let currentSortByInUrl = new URL(window.location.href).searchParams.get('sort_by');
+
+        if (!currentSortByInUrl) {
+           // Если пользователь перешел на страницу пагинации, а в URL нет сортировки
+           // (например, пришел на /category/page/2 и пагинация автоматически подхватила дефолтную или из куки)
+           let savedSort = getCookie(sortCookieName);
+           if (savedSort) {
+                const [cookieSortBy, cookieSortOrder] = savedSort.split(':');
+                // Добавляем параметры в ссылку пагинации перед переходом
+                let targetUrl = new URL($(this).attr('href'));
+                targetUrl.searchParams.set('sort_by', cookieSortBy);
+                targetUrl.searchParams.set('sort_order', cookieSortOrder);
+                window.location.href = targetUrl.toString();
+                e.preventDefault(); // Предотвращаем стандартный переход, чтобы перейти по модифицированной ссылке
+           }
+        }
+        // Если sort_by был в URL, или нет куки, просто даем браузеру перейти по ссылке
+    });
+
+    // Изменение для закрытия модалки
+    $(document).on('click', function(e) {
+        if (!$(e.target).closest('.modal_cont').length && !$(e.target).closest('.mini_modal').length) {
+            $('.mini_modal, .mini_modal_btn').removeClass('active');
+            if (typeof is_touch_device !== 'undefined' && is_touch_device()) {
+                 $('body').css('cursor', 'default');
+            }
+        }
+    });
+
+    // Вызываем инициализацию сортировки после загрузки DOM
+    initSort();
+
+    
 })
 
 
@@ -616,16 +802,15 @@ window.addEventListener('resize', function () {
 const initMap = () => {
 	ymaps.ready(() => {
 		let myMap = new ymaps.Map('map', {
-			center: [55.755864, 37.617698],
-			zoom: 16,
-			controls: []
+			center: [55.768693, 47.167166],
+			zoom: 8,
 		})
 
 
 		// Placemark
-		let myPlacemark = new ymaps.Placemark([55.755864, 37.617698], {}, {
+		let myPlacemark = new ymaps.Placemark([56.126599, 47.255121], {}, {
 			iconLayout : 'default#image',
-			iconImageHref : 'images/map_marker.svg',
+			iconImageHref : 'http://localhost/2026/iphone/wp-content/themes/raten/images/map_marker.svg',
 			iconImageSize : [50, 61],
 			iconImageOffset : [-25, -61],
 		})
@@ -634,14 +819,23 @@ const initMap = () => {
 
 
 		// Placemark 2
-		let myPlacemark2 = new ymaps.Placemark([55.757766, 37.614864], {}, {
+		let myPlacemark2 = new ymaps.Placemark([56.109728, 47.476089], {}, {
 			iconLayout : 'default#image',
-			iconImageHref : 'images/map_marker.svg',
+			iconImageHref : 'http://localhost/2026/iphone/wp-content/themes/raten/images/map_marker.svg',
 			iconImageSize : [50, 61],
 			iconImageOffset : [-25, -61],
 		})
 
 		myMap.geoObjects.add(myPlacemark2)
+
+        let myPlacemark3 = new ymaps.Placemark([55.498933, 46.413912], {}, {
+			iconLayout : 'default#image',
+			iconImageHref : 'http://localhost/2026/iphone/wp-content/themes/raten/images/map_marker.svg',
+			iconImageSize : [50, 61],
+			iconImageOffset : [-25, -61],
+		})
+
+		myMap.geoObjects.add(myPlacemark3)
 
 
 		myMap.behaviors.disable('scrollZoom')
