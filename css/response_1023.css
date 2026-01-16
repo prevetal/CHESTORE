@@ -98,22 +98,9 @@
     /*-------------
         Sidebar
     -------------*/
-    aside
-    {
-        margin-bottom: var(--inner_gap);
-    }
-
-
     .content + aside
     {
         margin-top: var(--outside_gap_s);
-        margin-bottom: 0;
-    }
-
-
-    .mob_filter_btn
-    {
-        display: block;
     }
 
 
@@ -419,12 +406,69 @@
 
 
 
+    /*---------------------
+        Mob. filter btn
+    ---------------------*/
+    .mob_filter_btn
+    {
+        display: flex;
+    }
+
+
+
     /*------------
         Filter
     ------------*/
     .filter
     {
-        display: none;
+        position: fixed;
+        top: 0;
+        right: 100%;
+
+        display: flex;
+        flex-direction: column;
+
+        width: 100%;
+        height: 100%;
+        min-height: -moz-available;
+        min-height: -webkit-fill-available;
+        min-height:         fill-available;
+        margin: 0;
+        padding: 73px 0 0;
+
+        z-index: 100;
+        transition: transform .3s linear;
+
+        border-radius: 0;
+        background: var(--bg);
+    }
+
+
+    .filter.show
+    {
+        transform: translateX(100%);
+    }
+
+
+    .filter .mob_head
+    {
+        display: flex;
+    }
+
+
+    .filter .form
+    {
+        display: flex;
+        overflow: auto;
+        flex-direction: column;
+
+        height: 100%;
+        min-height: -moz-available;
+        min-height: -webkit-fill-available;
+        min-height:         fill-available;
+        padding: var(--cont_padding);
+
+        overscroll-behavior-y: contain;
     }
 
 
@@ -476,6 +520,19 @@
     /*--------------
         Products
     --------------*/
+    .products .sort
+    {
+        gap: var(--inner_gap_m);
+    }
+
+
+    .products .sort .btn
+    {
+        gap: 4px;
+    }
+
+
+
     .products .grid_row
     {
         --count_per_line: 3;

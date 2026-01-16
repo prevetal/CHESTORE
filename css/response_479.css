@@ -18,8 +18,8 @@
     ------------*/
     header .logo img
     {
-        width: 199px;
-        height: 40px;
+        width: 172px;
+        height: 35px;
     }
 
 
@@ -27,6 +27,13 @@
     header .contacts
     {
         display: none;
+    }
+
+
+
+    header .btns .mob_phone
+    {
+        display: block;
     }
 
 
@@ -121,7 +128,7 @@
     /*-------------------
         Contacts info
     -------------------*/
-    .contacts_info .callback_btn
+    .contacts_info .socials
     {
         width: 100%;
         margin-top: var(--inner_gap_m);

@@ -1,5 +1,6 @@
 WW = window.innerWidth || document.clientWidth || document.getElementsByTagName('body')[0].clientWidth
 WH = window.innerHeight || document.clientHeight || document.getElementsByTagName('body')[0].clientHeight
+BODY = document.getElementsByTagName('body')[0]
 
 
 // В самом начале вашего JS файла, перед DOMContentLoaded
@@ -298,15 +299,52 @@ document.addEventListener('DOMContentLoaded', function() {
 			spaceBetween: 0,
 			slidesPerView: 1,
 			lazy: true,
-			navigation: {
-				nextEl: '.swiper-button-next',
-				prevEl: '.swiper-button-prev'
-			},
 			thumbs: {
 				swiper: productThumbs
 			}
 		})
 	}
+
+
+	// Tabs slider
+	const tabsSliders = [],
+		tabs = document.querySelectorAll('.tabs.swiper')
+
+	tabs.forEach((el, i) => {
+		el.classList.add('tabs_s' + i)
+
+		let options = {
+			loop: false,
+			speed: 500,
+			navigation: {
+				nextEl: '.swiper-button-next',
+				prevEl: '.swiper-button-prev'
+			},
+			breakpoints: {
+				0: {
+					spaceBetween: 20,
+					slidesPerView: 1
+				},
+				768: {
+					spaceBetween: 40,
+					slidesPerView: 'auto'
+				},
+				1024: {
+					spaceBetween: 48,
+					slidesPerView: 'auto'
+				},
+				1280: {
+					spaceBetween: 50,
+					slidesPerView: 'auto'
+				},
+			},
+			on: {
+				slideChangeTransitionEnd: swiper => $(swiper.el).find('.swiper-slide-active .btn').click()
+			}
+		}
+
+		tabsSliders.push(new Swiper('.tabs_s' + i, options))
+	})
 
 
 	// Changing the quantity of goods
@@ -461,12 +499,11 @@ document.addEventListener('DOMContentLoaded', function() {
 
 
 	// Filter
-	$('.mob_filter_btn').click(function(e) {
+	$('.mob_filter_btn, .filter .mob_head .close_btn').click(function(e) {
 		e.preventDefault()
 
-		$(this).toggleClass('active')
-
-		$('.filter').slideToggle(300)
+		$('.mob_filter_btn').toggleClass('active')
+		$('.filter').toggleClass('show')
 	})
 
 
@@ -634,7 +671,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
 			if (is_touch_device()) $('body').css('cursor', 'default')
 		}
-	})*/ 
+	})*/
 
 
 	// Sort
@@ -762,7 +799,7 @@ document.addEventListener('DOMContentLoaded', function() {
     // Вызываем инициализацию сортировки после загрузки DOM
     initSort();
 
-    
+
 })
 
 

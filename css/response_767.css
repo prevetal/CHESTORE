@@ -44,46 +44,27 @@
     ----------*/
     .tabs
     {
-        display: grid;
-        overflow: auto;
-
-        width: calc(100% + var(--cont_padding_double));
         margin-block: 0 var(--cont_padding);
-        margin-inline: calc(var(--cont_padding) * -1);
-        padding-inline: var(--cont_padding);
-
-        border-radius: 0;
-
-        gap: var(--cont_padding_double);
-        grid-auto-flow: column;
-        grid-auto-columns: max-content;
-        scroll-padding: 0 var(--cont_padding);
-        scroll-snap-type: x mandatory;
-        scrollbar-color: transparent transparent !important;
-        scrollbar-width: thin !important;
-    }
-
-
-    .tabs::-webkit-scrollbar
-    {
-        display: none !important;
-
-        width: 0 !important;
-        height: 0 !important;
-
-        background-color: transparent !important;
-    }
-
-
-    .tabs::-webkit-scrollbar-thumb
-    {
-        background-color: transparent !important;
+        padding-block: 0;
     }
 
 
     .tabs .btn
     {
-        scroll-snap-align: start;
+        display: flex;
+        align-content: center;
+        align-items: center;
+        flex-wrap: wrap;
+        justify-content: center;
+
+        width: 100%;
+        height: 68px;
+        padding-block: var(--inner_gap_s);
+        padding-inline: var(--outside_gap_s);
+
+        line-height: 125%;
+
+        text-align: center;
     }
 
 
@@ -369,7 +350,7 @@
     /*-------------------
         Contacts info
     -------------------*/
-    .contacts_info .callback_btn
+    .contacts_info .socials
     {
         width: 180px;
     }
